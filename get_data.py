@@ -1,12 +1,12 @@
-# from pymongo import MongoClient
+from pymongo import MongoClient
 import pandas as pd
-# import os
+import os
 
 
-# mdb = MongoClient(os.environ["MONGODB_URI"])
-# coll = mdb["koinwork"]
-# raw_data = coll["label"]
+mdb = MongoClient(os.environ["MONGODB_URI"])
+coll = mdb["koinwork"]
+raw_data = coll["label"]
 
-df = pd.read_csv('./data/eda.csv')
+df = pd.DataFrame(list(raw_data.find({}, {'_id':0})))
 
 df.to_csv("./data/label.csv")

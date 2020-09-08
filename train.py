@@ -5,8 +5,7 @@ import pandas as pd
 import json
 
 df = pd.read_csv('./data/label_processed.csv')
-df.dropna(inplace=True)
-X_train, y = df['text'].values, df['label'].values
+X_train,y = df['text'].values, df['label'].values
 vectorizer = TfidfVectorizer()
 vectorizer.fit(df['text'].values)
 
@@ -18,4 +17,4 @@ yhat = [clf.predict(vectorizer.transform([a])) for a in X_train]
 
 acc = accuracy_score(yhat, y)
 with open("metrics.json", 'w') as outfile:
-    json.dump({"accuracy": acc}, outfile)
+        json.dump({ "accuracy": acc}, outfile)
