@@ -4,7 +4,7 @@ import os
 
 
 mdb = MongoClient(os.environ["MONGODB_URI"])
-coll = mdb["koinwork"]
+coll = mdb["koinworks"]
 raw_data = coll["label"]
 
 df = pd.DataFrame(list(raw_data.find({}, {'_id':0})))
