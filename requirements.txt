@@ -2,4 +2,5 @@ pandas
 sklearn
 numpy
 pymongo
+dnspython
 # xgboost
