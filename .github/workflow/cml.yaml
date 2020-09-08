@@ -11,8 +11,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install -r requirements.txt
-          python train.py
+          dvc repro
 
-          cat metrics.txt >> report.md
-          cml-publish confusion_matrix.png --md >> report.md
+          git fecth --prune
+          dvc metrics diff --show-md master > report.md
           cml-send-comment report.md
