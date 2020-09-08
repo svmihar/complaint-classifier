@@ -1,5 +1,6 @@
 pandas
 sklearn
-pymongo
 numpy
-xgboost
+pymongo
+dnspython
+# xgboost

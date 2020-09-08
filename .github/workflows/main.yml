@@ -9,10 +9,11 @@ jobs:
       - name: cml_run
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
           pip install -r requirements.txt
           dvc repro
 
-          git fecth --prune
+          git fetch  --prune
           dvc metrics diff --show-md master > report.md
           cml-send-comment report.md
