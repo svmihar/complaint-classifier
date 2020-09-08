@@ -2,7 +2,7 @@ get_data:
   cmd: python get_data.py
   deps:
   - path: get_data.py
-    md5: 20507889b6d92044322bed9af1dce103
+    md5: 807c2b14b9a135a6171f097fbdb9eca6
   outs:
   - path: data/label.csv
     md5: c075ae427823bf590864f441bd5cf09d
@@ -22,7 +22,7 @@ train:
   - path: data/label_processed.csv
     md5: 4662a3293e7309014a9c09e97e17d0e0
   - path: train.py
-    md5: 96eec1bfe0df0daf9b8ef3d9d749f886
+    md5: e11bace48ee1af3da62fbdfa6c8fc8e5
   outs:
   - path: metrics.json
-    md5: a5003c7f5d7fb186d0cd050c67046fb1
+    md5: d5b19e0f1d4d82e08d2733ff666dddb3

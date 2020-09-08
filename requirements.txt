@@ -1,5 +1,4 @@
 pandas
 sklearn
-pymongo
 numpy
-xgboost
+# xgboost
