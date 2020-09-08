@@ -15,7 +15,7 @@ vectorizer.fit(df['text'].values)
 
 X = vectorizer.transform(X_train)
 
-clf = RandomForestClassifier(max_depth=10, random_state=42)
+clf = RandomForestClassifier(max_depth=100, random_state=42)
 clf.fit(X, y)
 yhat = [clf.predict(vectorizer.transform([a])) for a in X_train]
 
