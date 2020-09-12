@@ -1,9 +1,0 @@
-pandas
-sklearn
-numpy
-flair
-fastapi
-uvicorn
-pymongo
-dnspython
-# xgboost
