@@ -5,9 +5,17 @@ import torch
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 import torch.nn as nn
 import torch.optim as optim
+from model import LSTM_word2vec
+from torchtext.vocab import Vectors
+""" ini dibutuhkan ketika pertama kali init
+ from gensim.models import Word2Vec
+ word_vecs = Word2Vec.load('./word2vec_weights/idwiki_word2vec_300.model')
+ word_vecs.wv.save_word2vec_format('./word2vec_weights/w2v.bin')
+ """
 
 
-device = torch.device("cuda:0")
+
+device = torch.device("cuda:0") # TODO: if cpu, then cpu, else cuda
 bs = 32
 
 # def load_dataset():
@@ -56,8 +64,9 @@ valid_iter = torchtext.data.BucketIterator(
     sort_within_batch=True,
 )
 
+vectors = Vectors(cache='word2vec_weights', name='w2v.bin')
 text_field.build_vocab(train, min_freq=1)
-
+text_field.vocab.set_vectors(vectors.stoi, vectors.vectors, vectors.dim)
 
 class LSTM(nn.Module):
     def __init__(self, dimension=128):
@@ -114,7 +123,7 @@ def load_metrics():
 def train(
     model,
     opt,
-    criterion=nn.BCELoss(),
+    criterion=nn.BCEWithLogitsLoss(),
     train_loader=train_iter,
     valid_loader=valid_iter,
     num_epochs=5,
@@ -169,7 +178,7 @@ def train(
 
             model.train()
 
-            print(f"train_loss: {average_train_loss}\nvalid_loss: {average_valid_loss}")
+            # print(f"train_loss: {average_train_loss}\nvalid_loss: {average_valid_loss}")
 
             # save checkpoint if best
             if best_valid_loss > average_valid_loss:
@@ -179,6 +188,8 @@ def train(
 
 
 if __name__ == "__main__":
-    model = LSTM().to(device)
-    opt = optim.AdamW(model.parameters(), lr=1e-3)
-    train(model, opt=opt, num_epochs=10)
+    # model = LSTM_1(text_field=text_field).to(device)
+    # model = LSTM().to(device)
+    model = LSTM_word2vec(text_field=text_field).to(device)
+    opt = optim.AdamW(model.parameters(), lr=1e-2)
+    train(model, opt=opt, num_epochs=300)

@@ -1,1 +1,3 @@
 __pycache__/
+src/word2vec_weights/
+word2vec_weights/

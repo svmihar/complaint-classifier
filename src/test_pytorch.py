@@ -1,5 +1,7 @@
 import torch
+from model import LSTM_word2vec
 from sklearn.metrics import accuracy_score, classification_report
+from train_pytorch import text_field
 from train_pytorch import LSTM, test_iter
 
 
@@ -34,8 +36,11 @@ def evaluate(
 
 if __name__ == "__main__":
     device = torch.device("cuda")
-    model = LSTM().to(device)
-    opt = torch.optim.AdamW(model.parameters(), lr=1e-3)
+    # model = LSTM_1(text_field=text_field).to(device)
+    # model = LSTM().to(device)
+    model = LSTM_word2vec(text_field=text_field).to(device)
+    # opt = torch.optim.AdamW(model.parameters(), lr=1e-3)
+    opt = torch.optim.AdamW(model.parameters(), lr=1e-2)
     load_("./models/model.pt", model, opt)  # modifies the internal model, and opt
 
     evaluate(model, test_iter, device=device)
