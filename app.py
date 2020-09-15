@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 import uvicorn
-from model import classify, load_model
+from train import predict, load_xgboost_model
 
-model = load_model()
+m,v = load_xgboost_model()
 app = FastAPI()
 
 @app.get('/')
@@ -11,7 +11,7 @@ def home():
 
 @app.get("/predict/{query}")
 def pred(query: str):
-    result = classify(model,query)
+    result = predict(m,v,query.lower())
     return {'label': result}
 
 if __name__ == "__main__":
