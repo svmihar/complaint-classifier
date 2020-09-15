@@ -4,3 +4,5 @@ pandas
 xgboost
 pymongo
 dnspython
+fastapi
+uvicorn
