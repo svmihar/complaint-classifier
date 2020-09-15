@@ -1,5 +1,4 @@
 import os
-import optuna
 import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 import joblib
@@ -29,6 +28,7 @@ def model_sklearn(df):
 
 
 def model_xgboost(trial):
+    import optuna
 
     X_train, y = load_data()
     # vectorizer = TfidfVectorizer()
@@ -98,6 +98,7 @@ def predict(m, v, query):
 
 
 def optimizer():
+    import optuna
     s = optuna.create_study(
         pruner=optuna.pruners.MedianPruner(n_warmup_steps=5), direction="maximize"
     )
