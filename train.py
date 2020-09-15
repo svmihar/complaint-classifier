@@ -119,4 +119,4 @@ if __name__ == "__main__":
     acc = accuracy_score(y_pred, y)
 
     with open("metrics.json", "w") as f:
-        json.dumps({"accuracy": acc}, f)
+        json.dump({"accuracy": acc}, f)
