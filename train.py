@@ -94,7 +94,7 @@ def predict(m, v, query):
     q = v.transform([query])
     q_d = xgb.DMatrix(q)
     p = m.predict(q_d)
-    return p[0]
+    return 1 if p[0]>.5 else 0
 
 
 def optimizer():
